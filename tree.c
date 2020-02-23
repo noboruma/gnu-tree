@@ -1,5 +1,5 @@
 /* $Copyright: $
- * Copyright (c) 1996 - 2018 by Steve Baker (ice@mama.indstate.edu)
+ * Copyright (c) 1996-2020 - 2018 by Steve Baker (ice@mama.indstate.edu)
  * All Rights reserved
  *
  * This program is free software; you can redistribute it and/or modify
@@ -452,7 +452,7 @@ int main(int argc, char **argv)
     }
   }
   if (p) dirname[p] = NULL;
-  
+
   if (outfilename == NULL) {
 #ifdef __EMX__
     _fsetmode(outfile=stdout,Hflag?"b":"t");
@@ -471,7 +471,7 @@ int main(int argc, char **argv)
     }
   }
 
-  
+
   if (timefmt)
     setlocale(LC_TIME,"");
 
@@ -855,7 +855,7 @@ struct _info **unix_getfulltree(char *d, u_long lev, dev_t dev, off_t *size, cha
     return NULL;
   }
   path = malloc(pathsize=4096);
-  
+
   if (flimit > 0 && n > flimit) {
     sprintf(path,"%d entries exceeds filelimit, not opening dir",n);
     *err = scopy(path);
@@ -864,11 +864,11 @@ struct _info **unix_getfulltree(char *d, u_long lev, dev_t dev, off_t *size, cha
     return NULL;
   }
   if (cmpfunc) qsort(dir,n,sizeof(struct _info *),cmpfunc);
-  
+
   if (lev >= maxdirs-1) {
     dirs = xrealloc(dirs,sizeof(int) * (maxdirs += 1024));
   }
-  
+
   while (*dir) {
     if ((*dir)->isdir && !(xdev && dev != (*dir)->dev)) {
       if ((*dir)->lnk) {
@@ -1011,7 +1011,7 @@ void *xrealloc (void *ptr, size_t size)
 void free_dir(struct _info **d)
 {
   int i;
-  
+
   for(i=0;d[i];i++) {
     free(d[i]->name);
     if (d[i]->lnk) free(d[i]->lnk);
@@ -1024,7 +1024,7 @@ char *gnu_getcwd()
 {
   int size = 100;
   char *buffer = (char *) xmalloc (size);
-     
+
   while (1)
     {
       char *value = getcwd (buffer, size);
@@ -1316,6 +1316,6 @@ char *fillinfo(char *buf, struct _info *ent)
   if (gflag) n += sprintf(buf+n, " %-8.32s", gidtoname(ent->gid));
   if (sflag) n += psize(buf+n,ent->size);
   if (Dflag) n += sprintf(buf+n, " %s", do_date(cflag? ent->ctime : ent->mtime));
-  
+
   return buf;
 }
